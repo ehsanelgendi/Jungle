@@ -60,7 +60,30 @@
             <li><%= link_to 'Categories', [:admin, :categories], class: "nav-link" %></li>
           </ul>
         </li>
-        <li><%= link_to 'About', [:about, :index], class: "nav-link" %></li>
+        <% if current_user %>
+            <li class="nav-item">
+              <span class="nav-link">
+                Signed in as <%= "#{current_user.first_name} #{current_user.last_name}" %>
+              </span>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link">|</span>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Logout", '/logout', class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Login', '/login', class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link">|</span>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Signup', '/signup', class: "nav-link" %>
+            </li> 
+        <% end %>
+        
         <li class="nav-item end-0">
           <%= link_to cart_path, class: "nav-link " do %> <%= fa_icon "shopping-cart" %>
           My Cart (<%= cart.size %>) <% end %>

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to '/'
     else
+      flash[:error] = "Invalid email or name"
       redirect_to '/signup'
     end
   end
